@@ -1,24 +1,12 @@
-var data = require('fs').readFileSync('input.txt', 'utf8')
+var data = require('fs').readFileSync('day01/input.txt', 'utf8')
+data = data.split('\n').map(Number)
 
-data = data.split('\n').map(n => Number(n))
-data.pop()
-
-let increased_counter
+let n
 
 //Part 1
-increased_counter = data.reduce((sum, item, i) => {
-    sum += data[i] > data[i - 1] ? 1 : 0
-    return sum
-}, 0)
-console.log(increased_counter) //1475
-
+n = data.filter((e, i) => data[i] > data[i - 1], 0).length
+console.log(`Part 1: ${n}`) //1475
 
 //Part 2
-increased_counter = data.reduce((sum, item, i) => {
-    let sum1 = data[i] + data[i + 1] + data[i + 2]
-    let sum2 = data[i + 1] + data[i + 2] + data[i + 3]
-
-    sum += sum2 > sum1 ? 1 : 0
-    return sum
-}, 0)
-console.log(increased_counter) //1516
+n = data.filter((e, i) => data[i + 1] + data[i + 2] + data[i + 3] > data[i] + data[i + 1] + data[i + 2], 0).length
+console.log(`Part 2: ${n}`) //1516
